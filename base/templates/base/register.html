@@ -1,0 +1,37 @@
+{% extends 'base/index.html' %}
+{% block body %}
+<a class="text-lg ml-4 font-bold" href="{% url 'tasks' %}">🔙Go Back</a>
+<h1 class="text-lg ml-10 mt-10 font-bold text-green-500">®Register</h1> 
+<form method='post' class="shadow-lg m-10 rounded-lg">{% csrf_token %}
+    <div class="form-container px-10 py-10 flex shadow-lg ">
+        <div>
+    <div class="mt-4">
+        <label class="font-bold text-grey-500">Username</label>
+    </div>
+    <div class="border p-1">
+        {{form.username}}
+    </div>
+
+    <div class="mt-4">
+        <label class="font-bold text-grey-500">password</label>
+    </div>
+    <div class="border p-1">
+        {{form.password1}}
+    </div>
+
+    <div class="mt-4">
+        <label class="font-bold text-grey-500">Confirm Password</label>
+    </div>
+    <div class="border p-1">
+        {{form.password2}}
+    </div>
+<button type='submit' class="bg-green-500 px-5 py-2 mt-2 text-white font-bold rounded">Register</button>
+</div>
+</div>
+<p>Already have an account? <a class="font-bold" href="{% url 'login' %}">Login</p>
+</form>
+
+{% endblock body %}
+
+
+

@@ -1,0 +1,46 @@
+{% extends 'base/index.html' %}
+{% block body %}
+{% load static %}
+{% if request.user.is_authenticated %}
+<p>{{request.user}}</p>
+<a class="font-bold text-lg" href="{% url 'logout' %}"><img class="h-4" src="{% static 'base/images/login.png' %}">Logout</a>
+{% else %}
+<a class="font-bold text-lg" href="{% url 'login' %}"><img class="h-10" src="{% static 'base/images/login.png' %}">Login</a>
+{% endif %}
+<hr>
+<h1>My to-do list</h1>
+<button><a href="{%url 'create-task'%}" class="bg-green-500 rounded m-2">Add Task</a></button>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">User</th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Complete</th>
+        <th scope="col">Created</th>
+        <th scope="col">view</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for task in tasks %}
+      <tr>
+        <th scope="row">{{task.id}}</th>
+        <td>{{task.user}}</td>
+        <td>{{task.title}}</td>
+        <td>{{task.description}}</td>
+        <td>{{task.complete}}</td>
+        <td>{{task.created}}</td>
+        <td><a href="{% url 'task' task.id %}"><img class="h-6"src="{% static 'base/images/view.png' %}" alt=""></a></td>
+        <td><a href="{% url 'task-update' task.id %}"><img class="h-7"src="{% static 'base/images/edit.png' %}" alt=""></a></td>
+        <td><a href="{% url 'task-delete' task.id %}"><img class="h-7"src="{% static 'base/images/delete.png' %}" alt=""></a></td>  
+      </tr>
+      {%empty%}
+      <h1>No Item</h1>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endblock body %}
